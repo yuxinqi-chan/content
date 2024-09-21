@@ -8,7 +8,9 @@
     "preview": "nuxi preview"
   },
   "devDependencies": {
+    "@nuxthub/core": "^0.7.19",
     "content-wind": "latest",
-    "nuxt": "latest"
+    "nuxt": "latest",
+    "wrangler": "^3.78.7"
   }
 }

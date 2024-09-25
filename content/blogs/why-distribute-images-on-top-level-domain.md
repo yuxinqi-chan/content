@@ -11,6 +11,8 @@ authors:
 date: 2023-08-25
 badge:
   label: CDN
+sitemap:
+  loc: /blogs/why-distribute-images-on-top-level-domain
 ---
 
 ## 好处

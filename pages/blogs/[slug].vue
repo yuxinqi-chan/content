@@ -58,7 +58,7 @@ if (post.value.image?.src) {
         <UBadge v-bind="post.badge" variant="subtle" />
         <span class="text-gray-500 dark:text-gray-400">&middot;</span>
         <time class="text-gray-500 dark:text-gray-400">{{
-          new Date(post.date).toLocaleDateString("en", {
+          new Date(post.date).toLocaleDateString($i18n.locale, {
             year: "numeric",
             month: "short",
             day: "numeric",
@@ -94,6 +94,7 @@ if (post.value.image?.src) {
         <ContentToc
           v-if="post.body && post.body.toc"
           :links="post.body.toc.links"
+          :title="$t('Table of Contents')"
         />
       </template>
     </Page>

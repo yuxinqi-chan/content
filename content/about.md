@@ -9,6 +9,8 @@ authors:
 date: 2023-08-25
 badge:
   label: 关于
+sitemap:
+  loc: /about
 ---
 
 ## 功能

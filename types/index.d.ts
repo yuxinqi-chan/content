@@ -9,28 +9,28 @@ import type {
 import type { ParsedContent } from "@nuxt/content";
 import type { Avatar, Badge, Link } from "#ui/types";
 
-export interface Link extends ULink {
+export interface NLink extends ULink {
   label: string;
   class?: string;
   click?: (...args: any[]) => void;
 }
 
-export interface AsideLink extends Link {
+export interface AsideLink extends NLink {
   icon?: string;
   iconClass?: string;
 }
 
-export interface HeaderPopoverLink extends Link {
+export interface HeaderPopoverLink extends NLink {
   description?: string;
   icon?: string;
   iconClass?: string;
 }
 
-export interface HeaderLink extends Link {
+export interface HeaderLink extends NLink {
   children?: HeaderPopoverLink[];
 }
 
-export interface FooterLink extends Link {}
+export interface FooterLink extends NLink {}
 
 export interface BlogPost extends ParsedContent {
   title: string;

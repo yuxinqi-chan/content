@@ -9,9 +9,9 @@ useHead({
 
 <template>
   <div>
-    <NuxtRouteAnnouncer />
-
+    <NuxtLoadingIndicator />
     <NuxtLayout>
+      <NuxtRouteAnnouncer />
       <NuxtPage />
     </NuxtLayout>
 

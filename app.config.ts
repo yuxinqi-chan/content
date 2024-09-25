@@ -2,27 +2,6 @@ export default defineAppConfig({
   app: {
     logo: "/favicon.ico",
   },
-  socials: [
-    {
-      title: "GitHub",
-      icon: "i-simple-icons-github",
-      to: "https://github.com/yuxinqi-chan/content",
-      target: "_blank",
-    },
-  ],
-  footer: {
-    notice: "Developed with Nuxt",
-    smallLinks: [
-      {
-        label: "About",
-        to: "/about",
-      },
-      {
-        label: "Contact",
-        to: "mailto:yuxinqichan@gmail.com",
-      },
-    ],
-  },
   ui: {
     variables: {
       light: {

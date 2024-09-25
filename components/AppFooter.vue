@@ -1,10 +1,33 @@
 <script lang="ts" setup>
 const title = useRuntimeConfig().app.name;
+const { t } = useI18n();
 
-const appConfig = useAppConfig();
-const notice = appConfig.footer.notice;
-const smallLinks = appConfig.footer.smallLinks;
-const socials = appConfig.socials;
+const config = {
+  socials: [
+    {
+      title: "GitHub",
+      icon: "i-simple-icons-github",
+      to: "https://github.com/yuxinqi-chan/content",
+      target: "_blank",
+    },
+  ],
+  footer: {
+    notice: "Developed with Nuxt",
+    smallLinks: [
+      {
+        label: t("About"),
+        to: "/about",
+      },
+      {
+        label: t("Contact"),
+        to: "mailto:yuxinqichan@gmail.com",
+      },
+    ],
+  },
+};
+const notice = config.footer.notice;
+const smallLinks = config.footer.smallLinks;
+const socials = config.socials;
 </script>
 
 <template>

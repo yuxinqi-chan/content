@@ -2,16 +2,27 @@
 import type { HeaderLink } from "@/types";
 
 const { loggedIn, session, user } = useUserSession();
-
+const { t } = useI18n();
 const links = computed<HeaderLink[]>(() => {
-  const links: HeaderLink[] = [];
-
-  if (loggedIn.value) {
-    links.push({
-      label: "Dashboard",
-      to: "/dashboard",
-    });
-  }
+  const links: HeaderLink[] = [
+    {
+      label: t("Blog"),
+      to: "/blogs",
+    },
+    {
+      label: t("Media"),
+      children: [
+        {
+          label: t("Movies"),
+          to: "/movies",
+        },
+        {
+          label: t("Tv"),
+          to: "/tv",
+        },
+      ],
+    },
+  ];
 
   return links;
 });
@@ -67,9 +78,11 @@ const icon = useAppConfig().app.logo;
         </UDropdown>
       </template>
       <template v-else>
-        <UButton to="/login" color="gray" variant="ghost"> Login </UButton>
+        <UButton to="/login" color="gray" variant="ghost">
+          {{ $t("Login") }}
+        </UButton>
         <UButton to="/register" color="black" variant="solid">
-          Register
+          {{ $t("Register") }}
         </UButton>
       </template>
     </template>

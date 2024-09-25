@@ -44,7 +44,7 @@ defineOgImageComponent("Blog", {
           :description="post.description"
           :image="post.image"
           :date="
-            new Date(post.date).toLocaleDateString('en', {
+            new Date(post.date).toLocaleDateString($i18n.locale, {
               year: 'numeric',
               month: 'short',
               day: 'numeric',

@@ -1,3 +1,7 @@
 body {
-  @apply text-foreground bg-background font-sans antialiased;
+  @apply bg-background font-sans text-foreground antialiased;
+}
+
+.link {
+  @apply hover:text-primary transition-all duration-300;
 }

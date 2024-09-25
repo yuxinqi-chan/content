@@ -6,9 +6,12 @@ definePageMeta({
   middleware: "guest",
 });
 
-const title = "Login";
-const description =
-  "Use one of the following providers to login to your account.";
+const { t } = useI18n();
+
+const title = t("Login");
+const description = t(
+  "Use one of the following providers to login to your account",
+);
 
 useSeoMeta({
   title,
@@ -49,7 +52,7 @@ if (import.meta.server) {
       @close="message = ''"
     />
 
-    <UCard>
+    <UCard class="min-w-[400px]">
       <AuthForm
         :title
         :description
@@ -72,10 +75,19 @@ if (import.meta.server) {
         ]"
       >
         <template #footer>
-          Don't have an account yet?
-          <NuxtLink to="/register" class="text-primary font-medium">
-            Register
-          </NuxtLink>
+          <div class="flex justify-between">
+            <div>
+              {{ $t("Dont have an account yet") }}
+              <NuxtLink to="/register" class="text-primary font-medium">
+                {{ $t("Register") }}
+              </NuxtLink>
+            </div>
+            <div>
+              <NuxtLink to="/" class="text-primary font-medium">
+                {{ $t("Back to home") }}
+              </NuxtLink>
+            </div>
+          </div>
         </template>
       </AuthForm>
     </UCard>

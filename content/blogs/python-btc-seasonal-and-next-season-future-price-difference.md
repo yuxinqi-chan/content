@@ -10,7 +10,7 @@ authors:
       src: https://avatars.githubusercontent.com/u/11438187?s=48&v=4
 date: 2024-06-13T00:00:00.000Z
 badge:
-  label: BTC,Python
+  label: BTC, Python
 ---
 
 ## 下载数据
@@ -62,7 +62,7 @@ for contract in contracts:
     download_data(contract)
 ```
 
-## **解压**
+## 解压
 
 ```python
 import os

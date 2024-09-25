@@ -40,6 +40,7 @@ export default <Partial<Config>>{
                 borderColor: "var(--tw-prose-links)",
               },
               pre: {
+                marginTop: "0",
                 borderRadius: "0.375rem",
                 border: "1px solid var(--tw-prose-pre-border)",
                 color: "var(--tw-prose-pre-code) !important",

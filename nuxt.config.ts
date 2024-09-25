@@ -27,7 +27,7 @@ export default defineNuxtConfig({
         "md",
         "mdc",
         "yaml",
-        "py"
+        "py",
       ],
       theme: {
         dark: "github-dark",

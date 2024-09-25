@@ -13,6 +13,22 @@ export default defineNuxtConfig({
   },
   content: {
     highlight: {
+      langs: [
+        "js",
+        "jsx",
+        "json",
+        "ts",
+        "tsx",
+        "vue",
+        "css",
+        "html",
+        "vue",
+        "bash",
+        "md",
+        "mdc",
+        "yaml",
+        "py"
+      ],
       theme: {
         dark: "github-dark",
         default: "github-light",

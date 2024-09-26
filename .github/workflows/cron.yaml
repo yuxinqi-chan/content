@@ -1,0 +1,15 @@
+on:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  updateRecentVods:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          npm install
+      - name: Update recent vods
+        run: |
+          npm run cron:updateRecentVods

@@ -1,4 +1,9 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import {
+  sqliteTable,
+  text,
+  integer,
+  primaryKey,
+} from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -19,3 +24,17 @@ export const users = sqliteTable("users", {
     .$defaultFn(() => sql`(current_timestamp)`)
     .$onUpdateFn(() => sql`(current_timestamp)`),
 });
+
+export const vods = sqliteTable(
+  "vods",
+  {
+    provider: text("provider").notNull(),
+    vodId: integer("vod_id").notNull(),
+    vodName: text("vod_name").notNull(),
+    vodRemarks: text("vod_remarks"),
+    vodTime: text("vod_time"),
+  },
+  (t) => ({
+    pk: primaryKey({ columns: [t.provider, t.vodId] }),
+  }),
+);

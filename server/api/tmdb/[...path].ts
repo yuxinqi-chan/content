@@ -14,7 +14,7 @@ export default cachedEventHandler(
       query: query,
       body: event.method === "GET" ? null : await readBody(event),
       headers: {
-        Authorization: `Bearer ${appConfig.TMDB_ACCESS_TOKEN}`,
+        Authorization: `Bearer ${appConfig.tmdbAccessToken}`,
       },
     });
     return response;

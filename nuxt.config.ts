@@ -3,7 +3,8 @@ export default defineNuxtConfig({
     app: {
       name: process.env.NUXT_APP_NAME,
     },
-    TMDB_ACCESS_TOKEN: process.env.NUXT_TMDB_ACCESS_TOKEN,
+    cronToken: process.env.NUXT_CRON_TOKEN,
+    tmdbAccessToken: process.env.NUXT_TMDB_ACCESS_TOKEN,
   },
   sitemap: {
     sitemaps: {

@@ -54,4 +54,24 @@ export default defineAppConfig({
       },
     },
   },
+  vodProviders: [
+    {
+      name: "modu",
+      label: "魔都资源",
+      site: "https://www.mdzyapi.com",
+      url: "https://www.mdzyapi.com/api.php/provide/vod",
+    },
+    {
+      name: "huya",
+      label: "虎牙资源",
+      site: "https://huyazy.com",
+      url: "https://www.huyaapi.com/api.php/provide/vod/at/json",
+    },
+    {
+      name: "haohua",
+      label: "豪华资源",
+      site: "https://huohuzy.com",
+      url: "https://hhzyapi.com/api.php/provide/vod/at/json",
+    },
+  ],
 });

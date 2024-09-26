@@ -9,41 +9,43 @@ export default defineEventHandler(async (event) => {
   if (token !== cronToken) {
     return "Invalid token";
   }
-  const success = [];
-  const failed = [];
-  for (const provider of appConfig.vodProviders as VodProvider[]) {
-    try {
-      const vods = await $fetch<VodListResult>(provider.url, {
-        query: {
-          ac: "list",
-          h: 4,
-        },
-        responseType: "json",
-      });
-      for (const vod of vods.list) {
+  const success: string[] = [];
+  const failed: string[] = [];
+  await Promise.all(
+    (appConfig.vodProviders as VodProvider[]).map(async (provider) => {
+      try {
+        const vods = await $fetch<VodListResult>(provider.url, {
+          query: {
+            ac: "list",
+            h: 4,
+          },
+          responseType: "json",
+        });
         await useDrizzle()
           .insert(tables.vods)
-          .values({
-            provider: provider.name,
-            vodId: vod.vod_id,
-            vodName: vod.vod_name,
-            vodRemarks: vod.vod_remarks,
-            vodTime: vod.vod_time,
-          })
-          .onConflictDoUpdate({
-            target: [tables.vods.provider, tables.vods.vodId],
-            set: {
+          .values(
+            vods.list.map((vod) => ({
+              provider: provider.name,
+              vodId: vod.vod_id,
               vodName: vod.vod_name,
               vodRemarks: vod.vod_remarks,
               vodTime: vod.vod_time,
+            })),
+          )
+          .onConflictDoUpdate({
+            target: [tables.vods.provider, tables.vods.vodId],
+            set: {
+              vodName: sql.raw(`excluded.${tables.vods.vodName.name}`),
+              vodRemarks: sql.raw(`excluded.${tables.vods.vodRemarks.name}`),
+              vodTime: sql.raw(`excluded.${tables.vods.vodTime.name}`),
             },
           });
+        success.push(provider.label);
+      } catch (error) {
+        console.error(error);
+        failed.push(provider.label);
       }
-      success.push(provider.label);
-    } catch (error) {
-      console.error(error);
-      failed.push(provider.label);
-    }
-  }
+    }),
+  );
   return { success, failed };
 });

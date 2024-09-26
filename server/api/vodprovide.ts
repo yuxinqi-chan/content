@@ -38,9 +38,6 @@ export default cachedEventHandler(
   },
   {
     maxAge: 60 * 60,
-    getKey: (event: H3Event) => {
-      const url = getRequestURL(event);
-      return url.pathname + url.search;
-    },
+    getKey: (event: H3Event) => event.path,
   },
 );

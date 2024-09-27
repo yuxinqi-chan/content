@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Update recent vods
+      - name: Update pages vods
         env:
           NUXT_APP_URL: ${{ secrets.NUXT_APP_URL }}
           NUXT_CRON_TOKEN: ${{ secrets.NUXT_CRON_TOKEN }}

@@ -91,8 +91,10 @@ if (defaultOpenProvider) {
 } else {
   if (notEmptyProviders?.[0]) {
     (notEmptyProviders[0] as any).defaultOpen = true;
-    if (notEmptyProviders[0].list?.[0]) {
-      (notEmptyProviders[0].list[0] as any).defaultOpen = true;
+    for (const notEmptyProvider of notEmptyProviders) {
+      if (notEmptyProvider.list?.[0]) {
+        (notEmptyProvider.list[0] as any).defaultOpen = true;
+      }
     }
   }
 }
@@ -171,6 +173,9 @@ function playVideo(source: PlayingVideo) {
               :ui="{ rounded: 'rounded-none', padding: { sm: 'p-3' } }"
             >
               <span class="truncate">{{ item.label }}</span>
+              <UBadge size="xs" color="gray" variant="solid">
+                {{ item.list.length }}
+              </UBadge>
               <UButton
                 icon="i-heroicons-arrow-top-right-on-square"
                 size="sm"
@@ -207,6 +212,17 @@ function playVideo(source: PlayingVideo) {
                   :ui="{ rounded: 'rounded-none', padding: { sm: 'p-3' } }"
                 >
                   <span class="truncate">{{ item.label }}</span>
+                  <UBadge
+                    size="xs"
+                    color="gray"
+                    variant="solid"
+                    v-if="item.vod_remarks || item.vod_time"
+                  >
+                    <span class="mr-1" v-if="item.vod_time">
+                      {{ $dayjs(item.vod_time).fromNow() }}
+                    </span>
+                    <span v-if="item.vod_remarks">{{ item.vod_remarks }}</span>
+                  </UBadge>
                   <template #trailing>
                     <UIcon
                       name="i-heroicons-chevron-right-20-solid"
@@ -218,7 +234,6 @@ function playVideo(source: PlayingVideo) {
               </template>
               <template #item="{ item: vod }: { item: VodVideoItem }">
                 <div class="flex flex-wrap gap-2 px-4">
-                  <!-- {{ vod.vod_play_url }} -->
                   <UButton
                     v-for="source in urlsToList(vod.vod_play_url)"
                     color="blue"

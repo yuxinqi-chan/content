@@ -4,9 +4,11 @@ definePageMeta({
   middleware: "guest",
 });
 
-const title = "Register";
-const description =
-  "Use one of the following providers to register for an account.";
+const { t } = useI18n();
+const title = t("Register");
+const description = t(
+  "Use one of the following providers to login to your account",
+);
 
 useSeoMeta({
   title,
@@ -15,7 +17,7 @@ useSeoMeta({
 </script>
 
 <template>
-  <UCard>
+  <UCard class="min-w-[400px]">
     <AuthForm
       :title
       :description
@@ -37,10 +39,16 @@ useSeoMeta({
         },
       ]"
     >
-      By signing in, you agree to our
-      <NuxtLink to="/" class="text-primary font-medium">
-        Terms of Service </NuxtLink
-      >.
+      <template #footer>
+        <div class="flex justify-between">
+          <div></div>
+          <div>
+            <NuxtLink to="/" class="text-primary font-medium">
+              {{ $t("Back to home") }}
+            </NuxtLink>
+          </div>
+        </div>
+      </template>
     </AuthForm>
   </UCard>
 </template>

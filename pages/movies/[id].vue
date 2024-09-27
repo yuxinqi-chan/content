@@ -89,8 +89,10 @@ if (defaultOpenProvider) {
 } else {
   if (notEmptyProviders?.[0]) {
     (notEmptyProviders[0] as any).defaultOpen = true;
-    if (notEmptyProviders[0].list?.[0]) {
-      (notEmptyProviders[0].list[0] as any).defaultOpen = true;
+    for (const notEmptyProvider of notEmptyProviders) {
+      if (notEmptyProvider.list?.[0]) {
+        (notEmptyProvider.list[0] as any).defaultOpen = true;
+      }
     }
   }
 }
@@ -169,6 +171,9 @@ function playVideo(source: PlayingVideo) {
               :ui="{ rounded: 'rounded-none', padding: { sm: 'p-3' } }"
             >
               <span class="truncate">{{ item.label }}</span>
+              <UBadge size="xs" color="gray" variant="solid">
+                {{ item.list.length }}
+              </UBadge>
               <template #trailing>
                 <UIcon
                   name="i-heroicons-chevron-right-20-solid"
@@ -205,6 +210,17 @@ function playVideo(source: PlayingVideo) {
                     :to="item.site"
                     target="_blank"
                   />
+                  <UBadge
+                    size="xs"
+                    color="gray"
+                    variant="solid"
+                    v-if="item.vod_remarks"
+                  >
+                    <span class="mr-1">{{
+                      $dayjs(item.vod_time).fromNow()
+                    }}</span>
+                    <span>{{ item.vod_remarks }}</span>
+                  </UBadge>
                   <template #trailing>
                     <UIcon
                       name="i-heroicons-chevron-right-20-solid"

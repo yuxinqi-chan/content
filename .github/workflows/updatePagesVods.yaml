@@ -1,0 +1,16 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  updateRecentVods:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Update recent vods
+        env:
+          NUXT_APP_URL: ${{ secrets.NUXT_APP_URL }}
+          NUXT_CRON_TOKEN: ${{ secrets.NUXT_CRON_TOKEN }}
+        run: |
+          curl -X POST ${{ secrets.NUXT_APP_URL }}/cron/updatePagesVods?token=${{ secrets.NUXT_CRON_TOKEN }}

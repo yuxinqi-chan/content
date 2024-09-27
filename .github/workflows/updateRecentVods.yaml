@@ -8,15 +8,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: |
-          npm install
       - name: Update recent vods
         env:
           NUXT_APP_URL: ${{ secrets.NUXT_APP_URL }}
           NUXT_CRON_TOKEN: ${{ secrets.NUXT_CRON_TOKEN }}
         run: |
-          npm run cron:updateRecentVods
+          curl -X POST ${{ secrets.NUXT_APP_URL }}/cron/updateRecentVods?token=${{ secrets.NUXT_CRON_TOKEN }}

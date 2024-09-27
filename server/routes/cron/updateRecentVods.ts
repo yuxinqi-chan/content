@@ -14,32 +14,36 @@ export default defineEventHandler(async (event) => {
   await Promise.all(
     (appConfig.vodProviders as VodProvider[]).map(async (provider) => {
       try {
-        const vods = await $fetch<VodListResult>(provider.url, {
+        const vodsPageResult = await $fetch<VodListResult>(provider.url, {
           query: {
             ac: "list",
             h: 4,
           },
           responseType: "json",
         });
-        await useDrizzle()
-          .insert(tables.vods)
-          .values(
-            vods.list.map((vod) => ({
-              provider: provider.name,
-              vodId: vod.vod_id,
-              vodName: vod.vod_name,
-              vodRemarks: vod.vod_remarks,
-              vodTime: vod.vod_time,
-            })),
-          )
-          .onConflictDoUpdate({
-            target: [tables.vods.provider, tables.vods.vodId],
-            set: {
-              vodName: sql.raw(`excluded.${tables.vods.vodName.name}`),
-              vodRemarks: sql.raw(`excluded.${tables.vods.vodRemarks.name}`),
-              vodTime: sql.raw(`excluded.${tables.vods.vodTime.name}`),
-            },
-          });
+        if (vodsPageResult.list.length > 0) {
+          await useDrizzle()
+            .insert(tables.vods)
+            .values(
+              vodsPageResult.list
+                .filter((vod) => vod.vod_id && vod.vod_name)
+                .map((vod) => ({
+                  provider: provider.name,
+                  vodId: vod.vod_id,
+                  vodName: vod.vod_name,
+                  vodRemarks: vod.vod_remarks,
+                  vodTime: vod.vod_time,
+                })),
+            )
+            .onConflictDoUpdate({
+              target: [tables.vods.provider, tables.vods.vodId],
+              set: {
+                vodName: sql.raw(`excluded.${tables.vods.vodName.name}`),
+                vodRemarks: sql.raw(`excluded.${tables.vods.vodRemarks.name}`),
+                vodTime: sql.raw(`excluded.${tables.vods.vodTime.name}`),
+              },
+            });
+        }
         success.push(provider.label);
       } catch (error) {
         console.error(error);

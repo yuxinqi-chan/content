@@ -94,6 +94,7 @@ if (post.value.image?.src) {
         <ContentToc
           v-if="post.body && post.body.toc"
           :links="post.body.toc.links"
+          :title="$t('Table of Contents')"
         />
       </template>
     </Page>

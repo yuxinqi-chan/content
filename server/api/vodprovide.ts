@@ -17,7 +17,7 @@ export default cachedEventHandler(
     const vods = await drizzle
       .select()
       .from(tables.vods)
-      .where(like(tables.vods.vodName, wd));
+      .where(like(tables.vods.vodName, `%${wd}%`));
     const vodMap = _.groupBy(vods, "provider");
     const result = await Promise.all(
       _.entries(vodMap).map(async ([providerName, vods]) => {

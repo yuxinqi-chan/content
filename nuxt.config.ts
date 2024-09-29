@@ -23,6 +23,15 @@ export default defineNuxtConfig({
     "/blogs/**": { prerender: true },
   },
   css: ["@/assets/css/main.css"],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: "modern",
+        },
+      },
+    },
+  },
   ui: {
     global: true,
   },
@@ -61,6 +70,9 @@ export default defineNuxtConfig({
     "@nuxtjs/sitemap",
     "@nuxtjs/i18n",
     "dayjs-nuxt",
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    "@vueuse/nuxt",
   ],
   i18n: {
     langDir: "lang",

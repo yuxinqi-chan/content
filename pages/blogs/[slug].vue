@@ -4,10 +4,10 @@ import type { BlogPost } from "~/types";
 
 const route = useRoute();
 
-const { data: post } = await useAsyncData(route.path, () =>
+const { data: blog } = await useAsyncData(route.path, () =>
   queryContent<BlogPost>(route.path).findOne(),
 );
-if (!post.value) {
+if (!blog.value) {
   throw createError({
     statusCode: 404,
     statusMessage: "Post not found",
@@ -26,8 +26,8 @@ const { data: surround } = await useAsyncData(
   { default: () => [] },
 );
 
-const title = post.value.head?.title || post.value.title;
-const description = post.value.head?.description || post.value.description;
+const title = blog.value.head?.title || blog.value.title;
+const description = blog.value.head?.description || blog.value.description;
 
 useSeoMeta({
   title,
@@ -36,12 +36,12 @@ useSeoMeta({
   ogDescription: description,
 });
 
-if (post.value.image?.src) {
+if (blog.value.image?.src) {
   const site = useSiteConfig();
 
   useSeoMeta({
-    ogImage: joinURL(site.url, post.value.image.src),
-    twitterImage: joinURL(site.url, post.value.image.src),
+    ogImage: joinURL(site.url, blog.value.image.src),
+    twitterImage: joinURL(site.url, blog.value.image.src),
   });
 } else {
   defineOgImageComponent("Blog", {
@@ -52,13 +52,13 @@ if (post.value.image?.src) {
 }
 </script>
 <template>
-  <UContainer v-if="post">
-    <PageHeader :title="post.title" :description="post.description">
+  <UContainer v-if="blog">
+    <PageHeader :title="blog.title" :description="blog.description">
       <template #headline>
-        <UBadge v-bind="post.badge" variant="subtle" />
+        <UBadge v-bind="blog.badge" variant="subtle" />
         <span class="text-gray-500 dark:text-gray-400">&middot;</span>
         <time class="text-gray-500 dark:text-gray-400">{{
-          new Date(post.date).toLocaleDateString($i18n.locale, {
+          new Date(blog.date).toLocaleDateString($i18n.locale, {
             year: "numeric",
             month: "short",
             day: "numeric",
@@ -68,7 +68,7 @@ if (post.value.image?.src) {
 
       <div class="mt-4 flex flex-wrap items-center gap-3">
         <UButton
-          v-for="(author, index) in post.authors"
+          v-for="(author, index) in blog.authors"
           :key="index"
           :to="author.to"
           color="white"
@@ -83,17 +83,16 @@ if (post.value.image?.src) {
     </PageHeader>
     <Page>
       <PageBody prose>
-        <ContentRenderer v-if="post && post.body" :value="post" />
-
+        <ContentRenderer v-if="blog && blog.body" :value="blog" />
         <hr v-if="surround?.length" />
-
         <ContentSurround :surround="surround" />
+        <Comment class="mt-4" :reply-to="`blogs:${blog._id}`" />
       </PageBody>
 
       <template #right>
         <ContentToc
-          v-if="post.body && post.body.toc"
-          :links="post.body.toc.links"
+          v-if="blog.body && blog.body.toc"
+          :links="blog.body.toc.links"
           :title="$t('Table of Contents')"
         />
       </template>

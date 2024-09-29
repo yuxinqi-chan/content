@@ -2,7 +2,7 @@ import { z } from "zod";
 import { VodProvider, VodVideoListResult } from "~/types/vod";
 import { H3Event } from "h3";
 import { like } from "drizzle-orm";
-import _ from "lodash";
+import { groupBy, entries } from "lodash-es";
 
 export default cachedEventHandler(
   async (event) => {
@@ -18,9 +18,9 @@ export default cachedEventHandler(
       .select()
       .from(tables.vods)
       .where(like(tables.vods.vodName, `%${wd}%`));
-    const vodMap = _.groupBy(vods, "provider");
+    const vodMap = groupBy(vods, "provider");
     const result = await Promise.all(
-      _.entries(vodMap).map(async ([providerName, vods]) => {
+      entries(vodMap).map(async ([providerName, vods]) => {
         const provider = (appConfig.vodProviders as VodProvider[]).find(
           (p) => p.name === providerName,
         )!;

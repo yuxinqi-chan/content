@@ -15,6 +15,20 @@
       "when": 1727353634599,
       "tag": "0001_huge_ender_wiggin",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1727614761534,
+      "tag": "0002_melodic_doctor_strange",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1727617091848,
+      "tag": "0003_warm_roxanne_simpson",
+      "breakpoints": true
     }
   ]
 }

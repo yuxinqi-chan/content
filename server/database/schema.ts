@@ -38,3 +38,20 @@ export const vods = sqliteTable(
     pk: primaryKey({ columns: [t.provider, t.vodId] }),
   }),
 );
+
+export const comments = sqliteTable("comments", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  // 回复的资源标识符，如 blogs:1, vods:1, comments:1 等
+  replyTo: text("reply_to"),
+  nickname: text("nickname").notNull(),
+  email: text("email").notNull(),
+  site: text("site"),
+  content: text("content").notNull(),
+  avatar: text("avatar"),
+  ip: text("ip"),
+  location: text("location"),
+  userAgent: text("user_agent"),
+  createdAt: text("created_at")
+    .notNull()
+    .$defaultFn(() => sql`(current_timestamp)`),
+});

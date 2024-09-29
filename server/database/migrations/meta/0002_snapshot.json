@@ -1,9 +1,88 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "423f978e-9de5-431c-a7c4-088771a8e2a9",
-  "prevId": "81d1e0bf-cc81-43d5-8501-92f2c6833c71",
+  "id": "e368f45c-e29d-41dd-b40b-8a9c7f3eecab",
+  "prevId": "423f978e-9de5-431c-a7c4-088771a8e2a9",
   "tables": {
+    "comments": {
+      "name": "comments",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "reply_to": {
+          "name": "reply_to",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "nickname": {
+          "name": "nickname",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "site": {
+          "name": "site",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "avatar": {
+          "name": "avatar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "location": {
+          "name": "location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "users": {
       "name": "users",
       "columns": {
@@ -95,17 +174,23 @@
       "indexes": {
         "users_email_unique": {
           "name": "users_email_unique",
-          "columns": ["email"],
+          "columns": [
+            "email"
+          ],
           "isUnique": true
         },
         "users_github_id_unique": {
           "name": "users_github_id_unique",
-          "columns": ["github_id"],
+          "columns": [
+            "github_id"
+          ],
           "isUnique": true
         },
         "users_twitch_id_unique": {
           "name": "users_twitch_id_unique",
-          "columns": ["twitch_id"],
+          "columns": [
+            "twitch_id"
+          ],
           "isUnique": true
         }
       },
@@ -156,7 +241,10 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {
         "vods_provider_vod_id_pk": {
-          "columns": ["provider", "vod_id"],
+          "columns": [
+            "provider",
+            "vod_id"
+          ],
           "name": "vods_provider_vod_id_pk"
         }
       },

@@ -9,7 +9,6 @@ const props = defineProps({
     default: undefined,
   },
 });
-console.log(props.icon);
 const config = {
   "package.json": "vscode-icons:file-type-node",
   "tsconfig.json": "vscode-icons:file-type-tsconfig",

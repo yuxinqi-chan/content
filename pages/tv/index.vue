@@ -11,14 +11,17 @@ const search = ref(route.query.search as string);
 const dataUrl = computed(() =>
   route.query.search ? "/api/tmdb/search/tv" : "/api/tmdb/trending/tv/week",
 );
+const pageNumber = useRouteQuery("page", 1, { transform: Number });
 const searchQuery = computed(() =>
   route.query.search
     ? {
         query: route.query.search,
         language: locale.value,
+        page: route.query.page,
       }
     : {
         language: locale.value,
+        page: route.query.page,
       },
 );
 const { data } = await useFetch<TmdbPageResult<TmdbTvTrendingResult>>(dataUrl, {
@@ -53,7 +56,7 @@ const searchTv = () => {
       <UCard
         v-for="item in data?.results"
         :key="item.id"
-        class="max-w-[180px] overflow-hidden"
+        class="overflow-hidden"
         :ui="{
           header: {
             padding: 'sm:px-0 p-0',
@@ -64,8 +67,7 @@ const searchTv = () => {
           <NuxtLink :to="`/tv/${item.id}`">
             <img
               :src="`https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_path}`"
-              width="180"
-              height="270"
+              width="100%"
             />
           </NuxtLink>
         </template>
@@ -78,5 +80,12 @@ const searchTv = () => {
         </NuxtLink>
       </UCard>
     </div>
+    <UPagination
+      v-if="data && data.total_pages > 1"
+      class="mx-auto"
+      v-model="pageNumber"
+      :page-count="20"
+      :total="data.total_results"
+    />
   </div>
 </template>

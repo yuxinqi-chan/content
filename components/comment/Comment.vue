@@ -7,7 +7,7 @@ const props = defineProps<{
 const { t } = useI18n();
 
 const page = ref(1);
-const { data: comments, refresh } = await useFetch(`/api/comments`, {
+const { data: commentsPage, refresh } = await useFetch(`/api/comments`, {
   query: {
     replyTo: props.replyTo,
     page,
@@ -49,6 +49,9 @@ const onSubmit = async ({ data }: { data: typeof state }) => {
 </script>
 <template>
   <div class="flex flex-col gap-4">
+    <div class="text-lg text-gray-500">
+      {{ `${commentsPage?.total} ${t("Comment")}` }}
+    </div>
     <div class="flex items-start gap-4">
       <UAvatar class="mt-4" :src="gravatarUrl" :alt="state.nickname" />
       <UForm
@@ -93,12 +96,13 @@ const onSubmit = async ({ data }: { data: typeof state }) => {
         </div>
       </UForm>
     </div>
-    <CommentComments :comments="comments?.list" />
+    <CommentComments :comments="commentsPage?.list" />
     <UPagination
-      v-if="comments && comments.totalPages > 1"
+      v-if="commentsPage && commentsPage.totalPages > 1"
       class="mx-auto"
       v-model="page"
-      :total="comments.total"
+      :page-count="10"
+      :total="commentsPage.total"
     />
   </div>
 </template>

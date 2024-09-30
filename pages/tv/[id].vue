@@ -56,6 +56,8 @@ type PlayingVideo = {
   vod_id: number;
   label: string;
   url: string;
+  vod_name: string;
+  poster: string;
 };
 const playingVideo = ref<PlayingVideo>();
 const { data: providers } = await useFetch("/api/vodprovide", {
@@ -83,6 +85,8 @@ if (defaultOpenProvider) {
         vod_id: defaultOpenVod.vod_id,
         label: defaultOpenVideo.label,
         url: defaultOpenVideo.url,
+        vod_name: defaultOpenVod.vod_name,
+        poster: defaultOpenVod.vod_pic,
       };
     }
   } else {
@@ -153,10 +157,14 @@ function playVideo(source: PlayingVideo) {
       class="mx-auto flex max-w-[1400px] flex-col gap-4 px-[40px] py-2"
       v-if="providers"
     >
+      <div v-if="playingVideo" class="text-xl font-bold">
+        {{ `${playingVideo.vod_name}: ${playingVideo.label}` }}
+      </div>
       <ClientOnly v-if="playingVideo">
         <video-player
           id="player"
           :src="playingVideo.url"
+          :poster="playingVideo.poster"
           autoplay
           controls
           fluid
@@ -256,6 +264,8 @@ function playVideo(source: PlayingVideo) {
                         vod_id: vod.vod_id,
                         label: source.label,
                         url: source.url,
+                        vod_name: vod.vod_name,
+                        poster: vod.vod_pic,
                       })
                     "
                   >
@@ -266,6 +276,7 @@ function playVideo(source: PlayingVideo) {
             </UAccordion>
           </template>
         </UAccordion>
+        <Comment class="mt-4" :reply-to="`tv:${route.params.id}`" />
       </div>
     </div>
   </div>

@@ -1,4 +1,7 @@
 export default defineNuxtConfig({
+  app: {
+    pageTransition: { name: "page", mode: "out-in" },
+  },
   runtimeConfig: {
     app: {
       name: process.env.NUXT_APP_NAME,
@@ -72,6 +75,7 @@ export default defineNuxtConfig({
     "dayjs-nuxt",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
+    "@formkit/auto-animate/nuxt",
     "@vueuse/nuxt",
   ],
   i18n: {

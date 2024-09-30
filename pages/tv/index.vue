@@ -50,11 +50,10 @@ const searchTv = () => {
       v-model="search"
       @keyup.enter="searchTv"
     />
-    <div
-      class="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 py-8"
-    >
+    <ul class="grid grid-cols-[repeat(auto-fill,minmax(180px,1fr))] gap-4 py-8">
       <UCard
         v-for="item in data?.results"
+        as="li"
         :key="item.id"
         class="overflow-hidden"
         :ui="{
@@ -79,7 +78,7 @@ const searchTv = () => {
           {{ getTitle(item) }}
         </NuxtLink>
       </UCard>
-    </div>
+    </ul>
     <UPagination
       v-if="data && data.total_pages > 1"
       class="mx-auto"

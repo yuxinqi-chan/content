@@ -8,6 +8,12 @@ export default defineNuxtConfig({
     },
     cronToken: process.env.NUXT_CRON_TOKEN,
     tmdbAccessToken: process.env.NUXT_TMDB_ACCESS_TOKEN,
+    turnstile: {
+      secretKey: process.env.NUXT_TURNSTILE_SECRET_KEY,
+    },
+  },
+  turnstile: {
+    siteKey: process.env.NUXT_PUBLIC_TURNSTILE_SITE_KEY,
   },
   sitemap: {
     sitemaps: {
@@ -77,6 +83,7 @@ export default defineNuxtConfig({
     "pinia-plugin-persistedstate/nuxt",
     "@formkit/auto-animate/nuxt",
     "@vueuse/nuxt",
+    "@nuxtjs/turnstile",
   ],
   i18n: {
     langDir: "lang",

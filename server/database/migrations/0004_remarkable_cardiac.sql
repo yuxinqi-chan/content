@@ -1,0 +1,1 @@
+CREATE INDEX `vod_name` ON `vods` (`vod_name`);

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export default defineEventHandler(async (event) => {
-  const { replyTo, nickname, email, avatar, site, content } =
+  const { replyTo, nickname, email, avatar, site, content, token } =
     await readValidatedBody(
       event,
       z.object({
@@ -11,8 +11,16 @@ export default defineEventHandler(async (event) => {
         avatar: z.string().optional(),
         site: z.string().optional(),
         content: z.string(),
+        token: z.string(),
       }).parse,
     );
+  const verify = await verifyTurnstileToken(token, event);
+  if (!verify.success) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: "Turnstile token verification failed",
+    });
+  }
   const drizzle = useDrizzle();
   const cf = event.context.cf as CfProperties;
   const location = cf.city || cf.region || cf.country || cf.continent;

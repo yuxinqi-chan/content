@@ -3,6 +3,7 @@ import {
   text,
   integer,
   primaryKey,
+  index,
 } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
@@ -36,6 +37,7 @@ export const vods = sqliteTable(
   },
   (t) => ({
     pk: primaryKey({ columns: [t.provider, t.vodId] }),
+    vodName: index("vod_name").on(t.vodName),
   }),
 );
 

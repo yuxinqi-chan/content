@@ -18,6 +18,7 @@ const initialState = () => ({
   email: undefined,
   site: undefined,
   content: undefined,
+  token: undefined,
 });
 const state = reactive(initialState());
 
@@ -26,6 +27,7 @@ const schema = z.object({
   email: z.string().email(t("Required")),
   site: z.string().optional(),
   content: z.string().min(1, t("Required")),
+  token: z.string().optional(),
 });
 const gravatarUrl = ref<string>();
 const generateGravatarUrl = async () => {
@@ -92,7 +94,10 @@ const onSubmit = async ({ data }: { data: typeof state }) => {
             />
             <UButton color="gray" variant="ghost" icon="i-mdi-image" />
           </div>
-          <UButton type="submit"> {{ $t("Publish") }} </UButton>
+          <div class="flex items-center space-x-2">
+            <NuxtTurnstile v-model="state.token" />
+            <UButton type="submit"> {{ $t("Publish") }} </UButton>
+          </div>
         </div>
       </UForm>
     </div>

@@ -239,10 +239,12 @@ function playVideo(source: PlayingVideo) {
                 </UButton>
               </template>
               <template #item="{ item: vod }: { item: VodVideoItem }">
-                <div class="flex flex-wrap gap-2 px-4">
-                  <!-- {{ vod.vod_play_url }} -->
+                <div
+                  class="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-2 px-4"
+                >
                   <UButton
                     v-for="source in urlsToList(vod.vod_play_url)"
+                    class="justify-center"
                     color="blue"
                     :key="source.label"
                     :variant="

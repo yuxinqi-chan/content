@@ -69,7 +69,7 @@ const { data: providers } = await useFetch("/api/vodprovide", {
 });
 const notEmptyProviders = providers.value?.filter((p) => p.list.length > 0);
 const defaultOpenProvider = notEmptyProviders?.find(
-  (p) => p.label === route.query.provider,
+  (p) => p.name === route.query.provider,
 );
 if (defaultOpenProvider) {
   (defaultOpenProvider as any).defaultOpen = true;
@@ -83,7 +83,7 @@ if (defaultOpenProvider) {
     );
     if (defaultOpenVideo) {
       playingVideo.value = {
-        provider: defaultOpenProvider.label,
+        provider: defaultOpenProvider.name,
         vod_id: defaultOpenVod.vod_id,
         label: defaultOpenVideo.label,
         url: defaultOpenVideo.url,
@@ -134,6 +134,29 @@ function playVideo(source: PlayingVideo) {
     });
   }
 }
+useIntervalFn(() => {
+  if (playingVideo.value && videoPlayerRef.value) {
+    if (videoPlayerRef.value.currentTime()) {
+      localStorage.setItem(
+        `${playingVideo.value.provider}:${playingVideo.value.vod_id}:${playingVideo.value.label}`,
+        videoPlayerRef.value.currentTime(),
+      );
+    }
+  }
+}, 5000);
+function playerMounted(player: any) {
+  videoPlayerRef.value = player;
+  const currentTime = Number(
+    playingVideo.value && import.meta.client
+      ? localStorage.getItem(
+          `${playingVideo.value.provider}:${playingVideo.value.vod_id}:${playingVideo.value.label}`,
+        )
+      : 0,
+  );
+  if (currentTime) {
+    player.currentTime(currentTime);
+  }
+}
 </script>
 <template>
   <div>
@@ -158,7 +181,7 @@ function playVideo(source: PlayingVideo) {
           autoplay
           controls
           fluid
-          @mounted="({ player }) => (videoPlayerRef = player)"
+          @mounted="({ player }) => playerMounted(player)"
         />
       </ClientOnly>
       <div>
@@ -253,7 +276,7 @@ function playVideo(source: PlayingVideo) {
                     "
                     @click="
                       playVideo({
-                        provider: provider.label,
+                        provider: provider.name,
                         vod_id: vod.vod_id,
                         label: source.label,
                         url: source.url,

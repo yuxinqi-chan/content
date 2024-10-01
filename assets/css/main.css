@@ -5,3 +5,12 @@ body {
 .link {
   @apply hover:text-primary transition-all duration-300;
 }
+
+.vjs-poster {
+  background-size: cover !important;
+}
+.vjs-big-play-button {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+}

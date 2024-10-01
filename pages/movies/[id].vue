@@ -11,7 +11,7 @@ const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const { locale } = useI18n();
-const { data } = await useFetch<TmdbMovieDetail>(
+const { data: tmdbData } = await useFetch<TmdbMovieDetail>(
   `/api/tmdb/movie/${route.params.id}`,
   {
     query: {
@@ -19,7 +19,7 @@ const { data } = await useFetch<TmdbMovieDetail>(
     },
   },
 );
-if (!data.value) {
+if (!tmdbData.value) {
   throw createError({
     statusCode: 404,
     statusMessage: "Not Found",
@@ -27,7 +27,9 @@ if (!data.value) {
 }
 const title = computed(
   () =>
-    data.value?.title || data.value?.original_title || String(route.params.id),
+    tmdbData.value?.title ||
+    tmdbData.value?.original_title ||
+    String(route.params.id),
 );
 useHead({
   title: title.value,
@@ -100,18 +102,6 @@ if (defaultOpenProvider) {
     }
   }
 }
-function urlsToList(urls: string) {
-  return urls
-    .split("#")
-    .filter(Boolean)
-    .map((urlItem) => {
-      const [label, url] = urlItem.split("$");
-      return {
-        label,
-        url,
-      };
-    });
-}
 defineShortcuts({
   " ": () => {
     if (videoPlayerRef.value) {
@@ -148,8 +138,8 @@ function playVideo(source: PlayingVideo) {
     <div class="mx-auto max-w-[1400px] px-[40px] py-2">
       <UBreadcrumb :links="breadcrumbLinks" />
     </div>
-    <div v-if="data" class="flex flex-col gap-4">
-      <TmdbHeader :data="data" />
+    <div v-if="tmdbData" class="flex flex-col gap-4">
+      <TmdbHeader :data="tmdbData" />
     </div>
     <div
       class="mx-auto flex max-w-[1400px] flex-col gap-4 px-[40px] py-2"
@@ -162,7 +152,7 @@ function playVideo(source: PlayingVideo) {
         <video-player
           id="player"
           :src="playingVideo.url"
-          :poster="playingVideo.poster"
+          :poster="`https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/${tmdbData?.backdrop_path}`"
           autoplay
           controls
           fluid

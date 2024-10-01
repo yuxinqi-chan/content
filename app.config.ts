@@ -65,13 +65,13 @@ export default defineAppConfig({
       name: "huya",
       label: "虎牙资源",
       site: "https://huyazy.com",
-      url: "https://www.huyaapi.com/api.php/provide/vod/at/json",
+      url: "https://www.huyaapi.com/api.php/provide/vod/from/hym3u8/at/json",
     },
     {
       name: "haohua",
       label: "豪华资源",
       site: "https://huohuzy.com",
-      url: "https://hhzyapi.com/api.php/provide/vod/at/json",
+      url: "https://hhzyapi.com/api.php/provide/vod/from/hhm3u8/at/json",
     },
   ],
 });

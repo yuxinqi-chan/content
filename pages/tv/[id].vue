@@ -118,7 +118,6 @@ defineShortcuts({
 });
 function playVideo(source: PlayingVideo) {
   playingVideo.value = source;
-  console.log(source);
   router.push({
     query: {
       provider: source.provider,

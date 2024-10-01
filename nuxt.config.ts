@@ -84,6 +84,7 @@ export default defineNuxtConfig({
     "@formkit/auto-animate/nuxt",
     "@vueuse/nuxt",
     "@nuxtjs/turnstile",
+    "nuxt-lodash",
   ],
   i18n: {
     langDir: "lang",

@@ -1,5 +1,4 @@
 import { useIntersectionObserver } from "@vueuse/core";
-import { debounce, throttle } from "lodash-es";
 import type { DirectiveBinding } from "vue";
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -17,7 +16,7 @@ const debounceDirective = {
     }
 
     const delay = binding.arg ? parseInt(binding.arg) : 300;
-    const debouncedFn = debounce(binding.value, delay, {
+    const debouncedFn = useDebounce(binding.value, delay, {
       leading: true,
       trailing: false,
     });
@@ -42,7 +41,7 @@ const throttleDirective = {
     }
 
     const delay = binding.arg ? parseInt(binding.arg) : 300;
-    const throttledFn = throttle(binding.value, delay, {
+    const throttledFn = useThrottle(binding.value, delay, {
       leading: true,
       trailing: false,
     });

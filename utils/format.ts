@@ -7,7 +7,6 @@ import type {
   CatType,
 } from "@/types/player";
 import { msToTime } from "./time";
-import { isArray } from "lodash-es";
 
 type CoverDataType = {
   cover: string;

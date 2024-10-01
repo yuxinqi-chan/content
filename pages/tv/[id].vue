@@ -102,18 +102,6 @@ if (defaultOpenProvider) {
     }
   }
 }
-function urlsToList(urls: string) {
-  return urls
-    .split("#")
-    .filter(Boolean)
-    .map((urlItem) => {
-      const [label, url] = urlItem.split("$");
-      return {
-        label,
-        url,
-      };
-    });
-}
 defineShortcuts({
   " ": () => {
     if (videoPlayerRef.value) {

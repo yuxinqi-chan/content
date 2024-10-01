@@ -21,5 +21,6 @@
   "Comment": "Comment",
   "Publish": "Publish",
   "Content": "Content",
-  "Required": "Required"
+  "Required": "Required",
+  "Publish failed": "Publish failed"
 }

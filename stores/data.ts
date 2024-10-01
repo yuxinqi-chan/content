@@ -7,7 +7,6 @@ import type {
   CatType,
 } from "@/types/player";
 // import { playlistCatlist } from "@/api/playlist";
-import { cloneDeep, isEmpty } from "lodash-es";
 // import { isLogin } from "@/utils/auth";
 // import { formatCategoryList } from "@/utils/format";
 
@@ -87,7 +86,7 @@ export const useDataStore = defineStore({
         // 若为单曲
         else {
           // 若为单曲
-          const song = cloneDeep(data as SongType);
+          const song = useCloneDeep(data as SongType);
           // 歌曲去重
           const playList = this.playList.filter((s) => s.id !== song.id);
           // 添加到歌单末尾
@@ -119,7 +118,7 @@ export const useDataStore = defineStore({
       try {
         let historyList: ListState["historyList"] = [];
         // 深拷贝
-        song = cloneDeep(song);
+        song = useCloneDeep(song);
         // 添加到首项并移除重复项
         const updatedList = [
           song,

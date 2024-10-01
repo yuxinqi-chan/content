@@ -21,5 +21,6 @@
   "Comment": "评论",
   "Publish": "发表",
   "Content": "内容",
-  "Required": "必填"
+  "Required": "必填",
+  "Publish failed": "发布失败"
 }

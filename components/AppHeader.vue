@@ -15,10 +15,23 @@ const links = computed<HeaderLink[]>(() => {
         {
           label: t("Movies"),
           to: "/movies",
+          icon: "i-mdi-movie",
         },
         {
           label: t("Tv"),
           to: "/tv",
+          icon: "i-mdi-television",
+        },
+      ],
+    },
+    {
+      label: t("Finance"),
+      to: "/finance",
+      children: [
+        {
+          label: t("ETF"),
+          to: "/finance/etf",
+          icon: "i-mdi-chart-line",
         },
       ],
     },

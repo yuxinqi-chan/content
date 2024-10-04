@@ -4,9 +4,6 @@ import type { VodVideoItem } from "~/types/vod";
 import { VideoPlayer } from "@videojs-player/vue";
 import "video.js/dist/video-js.css";
 
-definePageMeta({
-  layout: "player",
-});
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();

@@ -40,7 +40,7 @@ const searchTv = () => {
 };
 </script>
 <template>
-  <div class="mx-auto flex w-full max-w-[1500px] flex-col gap-4">
+  <UContainer class="container flex flex-col gap-4 py-8">
     <UInput
       icon="i-heroicons-magnifying-glass-20-solid"
       size="sm"
@@ -87,5 +87,5 @@ const searchTv = () => {
       :page-count="20"
       :total="data.total_results"
     />
-  </div>
+  </UContainer>
 </template>

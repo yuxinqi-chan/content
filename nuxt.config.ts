@@ -85,6 +85,7 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxtjs/turnstile",
     "nuxt-lodash",
+    "nuxt-echarts",
   ],
   i18n: {
     langDir: "lang",
@@ -119,6 +120,15 @@ export default defineNuxtConfig({
     blob: true,
     kv: true,
     cache: true,
+  },
+  echarts: {
+    charts: ["CandlestickChart"],
+    components: [
+      "DatasetComponent",
+      "GridComponent",
+      "TitleComponent",
+      "TooltipComponent",
+    ],
   },
   devtools: {
     enabled: true,

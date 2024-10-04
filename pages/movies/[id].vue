@@ -51,57 +51,51 @@ const breadcrumbLinks = [
   },
 ];
 const videoPlayerRef = ref();
-type PlayingVideo = {
-  provider: string;
-  vod_id: number;
-  label: string;
-  url: string;
-  vod_name: string;
-  poster: string;
-};
-const playingVideo = ref<PlayingVideo>();
-const { data: providers } = await useFetch("/api/vodprovide", {
+const { data: providersData } = await useFetch("/api/vodprovide", {
   query: {
     wd: title.value,
   },
+  default: () => [],
 });
-const notEmptyProviders = providers.value?.filter((p) => p.list.length > 0);
-const defaultOpenProvider = notEmptyProviders?.find(
-  (p) => p.name === route.query.provider,
+const openedProviderName = useRouteQuery(
+  "provider",
+  () => providersData.value?.[0].name,
 );
-if (defaultOpenProvider) {
-  (defaultOpenProvider as any).defaultOpen = true;
-  const defaultOpenVod = defaultOpenProvider.list.find(
-    (vod) => vod.vod_id === Number(route.query.vod_id),
-  );
-  if (defaultOpenVod) {
-    (defaultOpenVod as any).defaultOpen = true;
-    const defaultOpenVideo = urlsToList(defaultOpenVod.vod_play_url).find(
-      (v) => v.label === route.query.label,
+const openedProvider = computed(() =>
+  providersData.value?.find((p) => p.name === openedProviderName.value),
+);
+const openedVodId = useRouteQuery(
+  "vod_id",
+  () => openedProvider.value?.list[0]?.vod_id,
+  {
+    transform: Number,
+  },
+);
+const openedVod = computed(() =>
+  openedProvider.value?.list.find((v) => v.vod_id === openedVodId.value),
+);
+const openedVideoLabel = useRouteQuery("label");
+const opendVideo = computed(() => {
+  if (openedVod.value) {
+    return urlsToList(openedVod.value.vod_play_url).find(
+      (v) => v.label === openedVideoLabel.value,
     );
-    if (defaultOpenVideo) {
-      playingVideo.value = {
-        provider: defaultOpenProvider.name,
-        vod_id: defaultOpenVod.vod_id,
-        label: defaultOpenVideo.label,
-        url: defaultOpenVideo.url,
-        vod_name: defaultOpenVod.vod_name,
-        poster: defaultOpenVod.vod_pic,
-      };
-    }
-  } else {
-    (defaultOpenProvider.list?.[0] as any).defaultOpen = true;
   }
-} else {
-  if (notEmptyProviders?.[0]) {
-    (notEmptyProviders[0] as any).defaultOpen = true;
-    for (const notEmptyProvider of notEmptyProviders) {
-      if (notEmptyProvider.list?.[0]) {
-        (notEmptyProvider.list[0] as any).defaultOpen = true;
-      }
-    }
-  }
-}
+});
+const providerItems = computed(() => {
+  return providersData.value?.map((p) => {
+    return {
+      ...p,
+      list: p.list.map((vod) => {
+        return {
+          ...vod,
+          defaultOpen: vod.vod_id === openedVodId.value,
+        };
+      }),
+      defaultOpen: p.name === openedProviderName.value,
+    };
+  });
+});
 defineShortcuts({
   " ": () => {
     if (videoPlayerRef.value) {
@@ -114,18 +108,12 @@ defineShortcuts({
     }
   },
 });
-function playVideo(source: PlayingVideo) {
-  playingVideo.value = source;
-  router.push({
-    query: {
-      provider: source.provider,
-      vod_id: source.vod_id,
-      label: source.label,
-    },
-  });
+function playVideo(provider: string, vod_id: number, label: string) {
+  openedProviderName.value = provider;
+  openedVodId.value = vod_id;
+  openedVideoLabel.value = label;
   const player = document.getElementById("player");
   if (player) {
-    // scroll player to middle of the page
     player.scrollIntoView({
       behavior: "smooth",
       block: "center",
@@ -133,10 +121,15 @@ function playVideo(source: PlayingVideo) {
   }
 }
 useIntervalFn(() => {
-  if (playingVideo.value && videoPlayerRef.value) {
+  if (
+    openedProvider.value &&
+    openedVod.value &&
+    opendVideo.value &&
+    videoPlayerRef.value
+  ) {
     if (videoPlayerRef.value.currentTime()) {
       localStorage.setItem(
-        `${playingVideo.value.provider}:${playingVideo.value.vod_id}:${playingVideo.value.label}`,
+        `${openedProvider.value.name}:${openedVod.value.vod_id}:${opendVideo.value.label}`,
         videoPlayerRef.value.currentTime(),
       );
     }
@@ -144,14 +137,17 @@ useIntervalFn(() => {
 }, 5000);
 function playerMounted(player: any) {
   videoPlayerRef.value = player;
-  const currentTime = Number(
-    playingVideo.value && import.meta.client
-      ? localStorage.getItem(
-          `${playingVideo.value.provider}:${playingVideo.value.vod_id}:${playingVideo.value.label}`,
-        )
-      : 0,
-  );
-  if (currentTime) {
+  if (
+    openedProvider.value &&
+    openedVod.value &&
+    opendVideo.value &&
+    import.meta.client
+  ) {
+    const currentTime = Number(
+      localStorage.getItem(
+        `${openedProvider.value.name}:${openedVod.value.vod_id}:${opendVideo.value.label}`,
+      ) || 0,
+    );
     player.currentTime(currentTime);
   }
 }
@@ -166,15 +162,15 @@ function playerMounted(player: any) {
     </div>
     <div
       class="mx-auto flex max-w-[1400px] flex-col gap-4 px-[40px] py-2"
-      v-if="notEmptyProviders"
+      v-if="providersData"
     >
-      <div v-if="playingVideo" class="text-xl font-bold">
-        {{ `${playingVideo.vod_name}: ${playingVideo.label}` }}
+      <div v-if="opendVideo && openedVod" class="text-xl font-bold">
+        {{ `${openedVod.vod_name}: ${opendVideo.label}` }}
       </div>
-      <ClientOnly v-if="playingVideo">
+      <ClientOnly v-if="opendVideo">
         <video-player
           id="player"
-          :src="playingVideo.url"
+          :src="opendVideo.url"
           :poster="`https://media.themoviedb.org/t/p/w1920_and_h800_multi_faces/${tmdbData?.backdrop_path}`"
           autoplay
           controls
@@ -183,18 +179,27 @@ function playerMounted(player: any) {
         />
       </ClientOnly>
       <div>
-        <UAccordion :items="notEmptyProviders">
-          <template #default="{ item, index, open }">
+        <UAccordion :items="providerItems">
+          <template #default="{ item: provider, index, open }">
             <UButton
               color="gray"
               variant="ghost"
               class="border-b border-gray-200 dark:border-gray-700"
               :ui="{ rounded: 'rounded-none', padding: { sm: 'p-3' } }"
             >
-              <span class="truncate">{{ item.label }}</span>
+              <span class="truncate">{{ provider.label }}</span>
               <UBadge size="xs" color="gray" variant="solid">
-                {{ item.list.length }}
+                {{ `${provider.list.length}${t("Related Resources")}` }}
               </UBadge>
+              <UButton
+                icon="i-heroicons-arrow-top-right-on-square"
+                size="sm"
+                variant="ghost"
+                color="gray"
+                square
+                :to="provider.site"
+                target="_blank"
+              />
               <template #trailing>
                 <UIcon
                   name="i-heroicons-chevron-right-20-solid"
@@ -214,33 +219,33 @@ function playerMounted(player: any) {
               "
               class="px-4"
             >
-              <template #default="{ item, index, open }">
+              <template #default="{ item: vod, index, open }">
                 <UButton
                   color="gray"
                   variant="ghost"
                   class="border-b border-gray-200 dark:border-gray-700"
                   :ui="{ rounded: 'rounded-none', padding: { sm: 'p-3' } }"
                 >
-                  <span class="truncate">{{ item.label }}</span>
+                  <span class="truncate">{{ vod.label }}</span>
                   <UButton
                     icon="i-heroicons-arrow-top-right-on-square"
                     size="sm"
                     variant="ghost"
                     color="gray"
                     square
-                    :to="item.site"
+                    :to="vod.site"
                     target="_blank"
                   />
                   <UBadge
                     size="xs"
                     color="gray"
                     variant="solid"
-                    v-if="item.vod_remarks"
+                    v-if="vod.vod_remarks"
                   >
                     <span class="mr-1">{{
-                      $dayjs(item.vod_time).fromNow()
+                      $dayjs(vod.vod_time).fromNow()
                     }}</span>
-                    <span>{{ item.vod_remarks }}</span>
+                    <span>{{ vod.vod_remarks }}</span>
                   </UBadge>
                   <template #trailing>
                     <UIcon
@@ -256,34 +261,25 @@ function playerMounted(player: any) {
                   class="grid grid-cols-[repeat(auto-fill,minmax(80px,1fr))] gap-2 px-4"
                 >
                   <UButton
-                    v-for="source in urlsToList(vod.vod_play_url)"
+                    v-for="video in urlsToList(vod.vod_play_url)"
                     class="justify-center"
                     color="blue"
-                    :key="source.label"
+                    :key="video.label"
                     :variant="
-                      source.label === playingVideo?.label &&
-                      provider.label === playingVideo?.provider &&
-                      vod.vod_id === playingVideo?.vod_id
+                      video.label === opendVideo?.label &&
+                      provider.label === openedProvider?.name &&
+                      vod.vod_id === openedVod?.vod_id
                         ? 'solid'
                         : 'outline'
                     "
                     :disabled="
-                      source.label === playingVideo?.label &&
-                      provider.label === playingVideo?.provider &&
-                      vod.vod_id === playingVideo?.vod_id
+                      video.label === opendVideo?.label &&
+                      provider.name === openedProvider?.name &&
+                      vod.vod_id === openedVod?.vod_id
                     "
-                    @click="
-                      playVideo({
-                        provider: provider.name,
-                        vod_id: vod.vod_id,
-                        label: source.label,
-                        url: source.url,
-                        vod_name: vod.vod_name,
-                        poster: vod.vod_pic,
-                      })
-                    "
+                    @click="playVideo(provider.name, vod.vod_id, video.label)"
                   >
-                    {{ source.label }}
+                    {{ video.label }}
                   </UButton>
                 </div>
               </template>

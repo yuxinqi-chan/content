@@ -67,6 +67,7 @@ const searchTv = () => {
             <img
               :src="`https://image.tmdb.org/t/p/w220_and_h330_face${item.poster_path}`"
               width="100%"
+              class="aspect-[2/3] object-cover"
             />
           </NuxtLink>
         </template>

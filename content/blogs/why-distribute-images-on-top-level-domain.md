@@ -8,11 +8,9 @@ authors:
     to: https://github.com/yuxinqi-chan
     avatar:
       src: https://avatars.githubusercontent.com/u/11438187?s=48&v=4
-date: 2023-08-25
+date: 2023-08-25T00:00:00.000Z
 badge:
   label: CDN
-sitemap:
-  loc: /blogs/why-distribute-images-on-top-level-domain
 ---
 
 ## 好处

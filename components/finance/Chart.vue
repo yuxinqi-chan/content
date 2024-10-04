@@ -31,7 +31,7 @@ const { data } = await useFetch("/api/finance", {
   },
   default: () => [],
 });
-const option = ref<ECOption>({
+const option = computed<ECOption>(() => ({
   title: {
     text: props.title ? `${props.title} ${props.symbol}` : props.symbol,
   },
@@ -47,7 +47,7 @@ const option = ref<ECOption>({
   series: [
     {
       type: "candlestick",
-      data: data.value.map((item) => [
+      data: data.value?.map((item) => [
         item.open,
         item.high,
         item.low,
@@ -61,7 +61,7 @@ const option = ref<ECOption>({
       type: "cross",
     },
   },
-});
+}));
 </script>
 
 <template>

@@ -11,8 +11,6 @@ authors:
 date: 2024-07-13T00:00:00.000Z
 badge:
   label: MT5, Python
-sitemap:
-  loc: /blogs/python-integrate-mt5-expose-api-for-external-services
 ---
 
 ## 安装依赖

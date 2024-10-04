@@ -1,4 +1,7 @@
 <script setup lang="ts">
+useHead({
+  title: "ETF",
+});
 const etfs = ref([
   { title: "沪深300ETF", symbol: "sh510300" },
   { title: "证券ETF", symbol: "sh512880" },

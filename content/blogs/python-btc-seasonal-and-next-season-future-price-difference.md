@@ -11,8 +11,6 @@ authors:
 date: 2024-06-13T00:00:00.000Z
 badge:
   label: BTC, Python
-sitemap:
-  loc: /blogs/python-btc-seasonal-and-next-season-future-price-difference
 ---
 
 ## 下载数据

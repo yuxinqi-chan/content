@@ -18,18 +18,13 @@ export default defineNuxtConfig({
   sitemap: {
     sitemaps: {
       pages: {
-        includeAppSources: true,
         urls: ["/"],
-        exclude: ["/profile", "/blogs/**"],
+        sources: ["/api/__sitemap__/urls/pages"],
       },
       blogs: {
-        includeAppSources: true,
-        include: ["/blogs/**"],
+        sources: ["/api/__sitemap__/urls/blogs"],
       },
     },
-  },
-  routeRules: {
-    "/blogs/**": { prerender: true },
   },
   css: ["@/assets/css/main.css"],
   vite: {
@@ -69,14 +64,13 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    "nuxt-echarts",
     "@nuxthub/core",
     "nuxt-auth-utils",
     "@nuxt/content",
     "@nuxt/image",
-    "@nuxthq/studio",
+    ...(process.env.NODE_ENV === "development" ? ["@nuxthq/studio"] : []),
     "@nuxt/ui",
-    "nuxt-og-image",
-    "@nuxtjs/sitemap",
     "@nuxtjs/i18n",
     "dayjs-nuxt",
     "@pinia/nuxt",
@@ -85,7 +79,8 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@nuxtjs/turnstile",
     "nuxt-lodash",
-    "nuxt-echarts",
+    "nuxt-og-image",
+    "@nuxtjs/sitemap",
   ],
   i18n: {
     langDir: "lang",
@@ -129,6 +124,9 @@ export default defineNuxtConfig({
       "TitleComponent",
       "TooltipComponent",
     ],
+  },
+  studio: {
+    enabled: true,
   },
   devtools: {
     enabled: true,

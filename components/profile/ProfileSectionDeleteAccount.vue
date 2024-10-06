@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { FetchError } from "ofetch";
+const { t } = useI18n();
 
 const isOpen = ref(false);
 const isLoading = ref(false);
@@ -28,13 +29,13 @@ async function onDeleteAccount() {
 
     session.value = {};
 
-    useSuccessToast("Account deleted successfully");
+    useSuccessToast(t("account-deleted-successfully"));
 
     await navigateTo("/");
   } catch (error) {
     console.error(error);
     useErrorToast(
-      "An error occurred while deleting your account",
+      t("an-error-occurred-while-deleting-your-account"),
       (error as FetchError).data.message,
     );
   } finally {
@@ -45,36 +46,44 @@ async function onDeleteAccount() {
 
 <template>
   <ProfileSection
-    title="Delete Account"
-    description="Permanently delete your account."
+    :title="$t('delete-account')"
+    :description="$t('permanently-delete-your-account')"
   >
     <UCard>
       <p>
-        Deleting your account is irreversible. All your data will be lost. Are
-        you sure you want to delete your account?
+        {{
+          $t(
+            "deleting-your-account-is-irreversible-all-your-data-will-be-lost-are-you-sure-you-want-to-delete-your-account",
+          )
+        }}
       </p>
-
+      
       <UButton class="mt-4" color="red" @click="askConfirmation">
-        Delete Account
+        {{ $t("delete-account") }}
       </UButton>
     </UCard>
 
     <UModal v-model="isOpen">
       <UCard :ui="{ footer: { base: 'flex justify-end' } }">
         <template #header>
-          <h2 class="text-lg font-semibold">Confirm Account Deletion</h2>
+          <h2 class="text-lg font-semibold">
+            {{ $t("confirm-account-deletion") }}
+          </h2>
           <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
-            This action is <strong>irreversible</strong> and will delete all
-            your data <strong>permanently</strong>.
+            {{
+              $t(
+                "this-action-is-irreversible-and-will-delete-all-your-data-permanently",
+              )
+            }}
           </p>
         </template>
 
         <template #footer>
           <UButton color="black" variant="ghost" @click="closeConfirmation()">
-            Cancel
+            {{ $t("cancel") }}
           </UButton>
           <UButton color="red" :loading="isLoading" @click="onDeleteAccount()">
-            Confirm
+            {{ $t("confirm") }}
           </UButton>
         </template>
       </UCard>

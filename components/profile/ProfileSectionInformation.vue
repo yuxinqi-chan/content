@@ -80,8 +80,10 @@ async function onSubmitProfileInformation(event: FormSubmitEvent<Schema>) {
 
 <template>
   <ProfileSection
-    title="Profile Information"
-    description="Update your account's profile information and email address."
+    :title="$t('profile-information')"
+    :description="
+      $t('update-your-accounts-profile-information-and-email-address')
+    "
   >
     <div class="grow space-y-8">
       <UCard v-if="user">
@@ -93,7 +95,7 @@ async function onSubmitProfileInformation(event: FormSubmitEvent<Schema>) {
               <label
                 class="group-hover:border-primary absolute inset-0 flex cursor-pointer items-center justify-center rounded-full border border-dashed border-transparent text-sm font-semibold text-transparent transition-all ease-in group-hover:bg-gray-700/50 group-hover:text-gray-200 group-hover:backdrop-blur"
               >
-                Edit
+                {{ $t("edit") }}
                 <input
                   ref="fileInput"
                   type="file"
@@ -106,10 +108,10 @@ async function onSubmitProfileInformation(event: FormSubmitEvent<Schema>) {
 
             <div class="flex flex-row gap-4">
               <UButton v-if="user.avatar" color="gray" @click="removeAvatar()">
-                Remove
+                {{ $t("remove") }}
               </UButton>
               <UButton v-else color="gray" @click="triggerFileInput()">
-                Upload
+                {{ $t("upload") }}
               </UButton>
             </div>
           </div>
@@ -124,25 +126,28 @@ async function onSubmitProfileInformation(event: FormSubmitEvent<Schema>) {
           @submit="onSubmitProfileInformation"
         >
           <div class="max-w-sm space-y-4">
-            <UFormGroup label="Email" name="email">
+            <UFormGroup :label="$t('Email')" name="email">
               <UInput v-model="state.email" required />
             </UFormGroup>
             <p
               v-if="!user?.verifiedAt"
               class="text-sm text-red-500 dark:text-red-400"
             >
-              Your email address '{{ user?.emailToVerify }}' is not verified.
-              Please check your inbox for the verification email before
-              continuing to use the application.
+              {{ $t("your-email-address") }} '{{ user?.emailToVerify }}'
+              {{
+                $t(
+                  "is-not-verified-please-check-your-inbox-for-the-verification-email-before-continuing-to-use-the-application",
+                )
+              }}
             </p>
 
-            <UFormGroup label="Name" name="name">
+            <UFormGroup :label="$t('Nickname')" name="name">
               <UInput v-model="state.name" required />
             </UFormGroup>
           </div>
 
           <div class="flex flex-row justify-end">
-            <UButton type="submit" color="primary"> Save </UButton>
+            <UButton type="submit" color="primary"> {{ $t("save") }} </UButton>
           </div>
         </UForm>
       </UCard>

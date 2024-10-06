@@ -7,6 +7,6 @@
     "*.css": "tailwindcss"
   },
   "i18n-ally.localesPaths": ["lang"],
-  "i18n-ally.sourceLanguage": "zh",
+  "i18n-ally.sourceLanguage": "en",
   "i18n-ally.keystyle": "nested"
 }

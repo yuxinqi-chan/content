@@ -29,13 +29,16 @@ async function disconnect(providerName: "github" | "twitch") {
 
 <template>
   <ProfileSection
-    title="Authentication"
-    description="Access to your account using another provider."
+    :title="$t('authentication')"
+    :description="$t('access-to-your-account-using-another-provider')"
   >
     <UCard class="grow">
       <p>
-        Link one or more of the following providers to your account to access it
-        using them.
+        {{
+          $t(
+            "link-one-or-more-of-the-following-providers-to-your-account-to-access-it-using-them",
+          )
+        }}
       </p>
 
       <div class="mt-4 flex flex-row gap-4">
@@ -46,7 +49,7 @@ async function disconnect(providerName: "github" | "twitch") {
           icon="i-simple-icons-github"
           @click="isGithubConnected ? disconnect('github') : undefined"
         >
-          {{ user?.githubId ? "Remove connection" : "Connect GitHub" }}
+          {{ user?.githubId ? $t("remove-connection") : $t("connect-github") }}
         </UButton>
         <UButton
           color="gray"
@@ -55,7 +58,7 @@ async function disconnect(providerName: "github" | "twitch") {
           icon="i-simple-icons-twitch"
           @click="isTwitchConnected ? disconnect('twitch') : undefined"
         >
-          {{ user?.twitchId ? "Remove connection" : "Connect Twitch" }}
+          {{ user?.twitchId ? $t("remove-connection") : $t("connect-twitch") }}
         </UButton>
       </div>
     </UCard>

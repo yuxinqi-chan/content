@@ -48,5 +48,8 @@
   "remove-connection": "Remove connection",
   "connect-github": "Connect GitHub",
   "connect-twitch": "Connect Twitch",
-  "permanently-delete-your-account": "Permanently delete your account."
+  "permanently-delete-your-account": "Permanently delete your account.",
+  "latest-price": "latest price",
+  "lowest-value": "lowest value",
+  "highest-value": "highest value"
 }

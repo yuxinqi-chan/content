@@ -1,42 +1,36 @@
 <script setup lang="ts">
+import type { stock_zh_a_daily } from "~/types/finance";
+
 const props = defineProps<{
   symbol: string;
   timeframe?: "day" | "week" | "5m" | "15m" | "30m";
-  ma: string;
-  datalen: string;
   title?: string;
 }>();
-const scale = computed(() => {
-  switch (props.timeframe) {
-    case "day":
-      return "240";
-    case "week":
-      return "1200";
-    case "5m":
-      return "5";
-    case "15m":
-      return "15";
-    case "30m":
-      return "30";
-    default:
-      return "240";
-  }
-});
-const { data } = await useFetch("/api/finance", {
-  query: {
-    symbol: props.symbol,
-    scale: scale,
-    ma: props.ma,
-    datalen: props.datalen,
+const { t } = useI18n();
+
+const { data } = await useFetch<stock_zh_a_daily[]>(
+  "https://aktools.compilesoul.com/api/public/stock_zh_a_daily",
+  {
+    query: {
+      symbol: props.symbol,
+    },
+    default: () => [],
   },
-  default: () => [],
-});
+);
 const option = computed<ECOption>(() => ({
-  title: {
-    text: props.title ? `${props.title} ${props.symbol}` : props.symbol,
+  grid: {
+    left: "10%",
+    right: "10%",
+    bottom: "15%",
   },
   xAxis: {
-    data: data.value?.map((item) => item.day),
+    type: "category",
+    data: data.value?.map((item) => item.date),
+    boundaryGap: false,
+    axisLine: { onZero: false },
+    splitLine: { show: false },
+    min: "dataMin",
+    max: "dataMax",
   },
   yAxis: {
     scale: true,
@@ -49,10 +43,50 @@ const option = computed<ECOption>(() => ({
       type: "candlestick",
       data: data.value?.map((item) => [
         item.open,
-        item.high,
-        item.low,
         item.close,
+        item.low,
+        item.high,
       ]),
+      markLine: {
+        symbol: ["none", "none"],
+        data: [
+          {
+            name: t("highest-value"),
+            type: "max",
+            valueDim: "highest",
+            label: {
+              formatter: "{b}: {c}",
+            },
+            lineStyle: {
+              color: "red",
+              type: "dashed",
+            },
+          },
+          {
+            name: t("lowest-value"),
+            type: "min",
+            valueDim: "lowest",
+            label: {
+              formatter: "{b}: {c}",
+            },
+            lineStyle: {
+              color: "green",
+              type: "dashed",
+            },
+          },
+          {
+            name: t("latest-price"),
+            yAxis: data.value?.[data.value.length - 1]?.close,
+            label: {
+              formatter: "{b}: {c}",
+            },
+            lineStyle: {
+              color: "blue",
+              type: "dashed",
+            },
+          },
+        ],
+      },
     },
   ],
   tooltip: {
@@ -61,6 +95,20 @@ const option = computed<ECOption>(() => ({
       type: "cross",
     },
   },
+  dataZoom: [
+    {
+      type: "inside",
+      start: 80,
+      end: 100,
+    },
+    {
+      show: true,
+      type: "slider",
+      top: "90%",
+      start: 50,
+      end: 100,
+    },
+  ],
 }));
 </script>
 

@@ -10,7 +10,7 @@
       </div>
 
       <slot name="links">
-        <UAsideLinks :links="links" />
+        <AsideLinks :links="links" />
       </slot>
 
       <slot />

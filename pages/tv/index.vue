@@ -40,7 +40,7 @@ const searchTv = () => {
 };
 </script>
 <template>
-  <UContainer class="container flex flex-col gap-4 py-8">
+  <UContainer class="container flex flex-grow flex-col gap-4 py-8">
     <UInput
       icon="i-heroicons-magnifying-glass-20-solid"
       size="sm"

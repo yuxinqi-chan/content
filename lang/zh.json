@@ -48,5 +48,8 @@
   "connect-github": "连接 GitHub",
   "remove-connection": "删除连接",
   "connect-twitch": "连接 Twitch",
-  "permanently-delete-your-account": "永久删除您的帐户。"
+  "permanently-delete-your-account": "永久删除您的帐户。",
+  "latest-price": "当前价",
+  "highest-value": "最高价",
+  "lowest-value": "最低价"
 }

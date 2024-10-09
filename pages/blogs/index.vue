@@ -31,7 +31,7 @@ defineOgImageComponent("Blog", {
 </script>
 
 <template>
-  <UContainer>
+  <UContainer class="flex-grow">
     <PageHeader v-bind="page" class="py-[50px]" />
 
     <PageBody>

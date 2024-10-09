@@ -117,12 +117,17 @@ export default defineNuxtConfig({
     cache: true,
   },
   echarts: {
-    charts: ["CandlestickChart"],
+    charts: ["LineChart"],
     components: [
       "DatasetComponent",
       "GridComponent",
       "TitleComponent",
       "TooltipComponent",
+      "DataZoomComponent",
+      "DataZoomInsideComponent",
+      "DataZoomSliderComponent",
+      "MarkLineComponent",
+      "MarkPointComponent",
     ],
   },
   studio: {

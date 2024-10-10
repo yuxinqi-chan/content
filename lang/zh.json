@@ -51,5 +51,7 @@
   "permanently-delete-your-account": "永久删除您的帐户。",
   "latest-price": "当前价",
   "highest-value": "最高价",
-  "lowest-value": "最低价"
+  "lowest-value": "最低价",
+  "Tools": "工具",
+  "id-photo-generator": "证件照生成器"
 }

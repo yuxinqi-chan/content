@@ -28,6 +28,17 @@ const links = computed<HeaderLink[]>(() => {
       label: t("Finance"),
       to: "/finance",
     },
+    {
+      label: t("Tools"),
+      children: [
+        {
+          label: t("id-photo-generator"),
+          icon: "i-mdi-camera",
+          target: "_blank",
+          to: "https://idphotos.compilesoul.com",
+        },
+      ],
+    },
   ];
 
   return links;

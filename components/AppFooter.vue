@@ -35,7 +35,10 @@ const socials = config.socials;
     :links="smallLinks"
     :ui="{ bottom: { left: 'text-sm text-gray-600 dark:text-gray-300' } }"
   >
-    <template #left> {{ title }} - {{ notice }} </template>
+    <template #left>
+      &copy; {{ new Date().getFullYear() }} {{ title }}.
+      {{ t("all_rights_reserved") }}.
+    </template>
 
     <template #right>
       <UButton

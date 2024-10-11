@@ -95,11 +95,17 @@ const { copy } = useClipboard();
           <input
             id="dropzone-file"
             type="file"
+            accept="image/*"
             class="hidden"
             @change="handleFileChange"
           />
         </label>
-        <UButton size="lg" color="cyan" @click="uploadImage">
+        <UButton
+          v-if="selectedFile"
+          size="lg"
+          color="cyan"
+          @click="uploadImage"
+        >
           {{ t("upload") }}
         </UButton>
       </div>

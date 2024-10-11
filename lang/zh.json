@@ -56,5 +56,7 @@
   "id-photo-generator": "证件照生成器",
   "pdf-converter": "PDF 转换",
   "all_rights_reserved": "版权所有",
-  "web-ssh": "网页 SSH"
+  "web-ssh": "网页 SSH",
+  "Picture": "图片",
+  "copyLink": "复制链接"
 }

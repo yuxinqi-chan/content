@@ -10,6 +10,10 @@ const links = computed<HeaderLink[]>(() => {
       to: "/blogs",
     },
     {
+      label: t("Picture"),
+      to: "/picture",
+    },
+    {
       label: t("Media"),
       children: [
         {

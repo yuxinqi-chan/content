@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     app: {
       name: process.env.NUXT_APP_NAME,
+      url: process.env.NUXT_APP_URL,
     },
     cronToken: process.env.NUXT_CRON_TOKEN,
     tmdbAccessToken: process.env.NUXT_TMDB_ACCESS_TOKEN,

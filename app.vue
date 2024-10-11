@@ -27,6 +27,11 @@ const links = [
     icon: "i-mdi-movie",
   },
   {
+    label: t("Picture"),
+    to: "/picture",
+    icon: "i-mdi-image",
+  },
+  {
     label: t("Tv"),
     to: "/tv",
     icon: "i-mdi-television",

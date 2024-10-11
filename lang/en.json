@@ -56,5 +56,7 @@
   "id-photo-generator": "ID Photo Generator",
   "pdf-converter": "PDF Converter",
   "all_rights_reserved": "All rights reserved",
-  "web-ssh": "Web SSH"
+  "web-ssh": "Web SSH",
+  "Picture": "Picture",
+  "copyLink": "copy link"
 }

@@ -53,5 +53,6 @@
   "highest-value": "最高价",
   "lowest-value": "最低价",
   "Tools": "工具",
-  "id-photo-generator": "证件照生成器"
+  "id-photo-generator": "证件照生成器",
+  "pdf-converter": "PDF 转换"
 }

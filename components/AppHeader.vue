@@ -37,6 +37,12 @@ const links = computed<HeaderLink[]>(() => {
           target: "_blank",
           to: "https://idphotos.compilesoul.com",
         },
+        {
+          label: t("pdf-converter"),
+          icon: "i-mdi-file-pdf",
+          target: "_blank",
+          to: "https://pdf.compilesoul.com",
+        },
       ],
     },
   ];

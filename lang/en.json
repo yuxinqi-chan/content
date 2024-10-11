@@ -53,5 +53,6 @@
   "lowest-value": "lowest value",
   "highest-value": "highest value",
   "Tools": "Tools",
-  "id-photo-generator": "ID Photo Generator"
+  "id-photo-generator": "ID Photo Generator",
+  "pdf-converter": "PDF Converter"
 }

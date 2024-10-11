@@ -2,7 +2,7 @@
 import type { HeaderLink } from "@/types";
 
 const { loggedIn, session, user } = useUserSession();
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const links = computed<HeaderLink[]>(() => {
   const links: HeaderLink[] = [
     {
@@ -41,7 +41,9 @@ const links = computed<HeaderLink[]>(() => {
           label: t("pdf-converter"),
           icon: "i-mdi-file-pdf",
           target: "_blank",
-          to: "https://pdf.compilesoul.com",
+          to: locale.value.includes("zh")
+            ? "https://pdf.compilesoul.com/?lang=zh_CN"
+            : "https://pdf.compilesoul.com",
         },
       ],
     },

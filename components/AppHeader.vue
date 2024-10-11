@@ -45,6 +45,12 @@ const links = computed<HeaderLink[]>(() => {
             ? "https://pdf.compilesoul.com/?lang=zh_CN"
             : "https://pdf.compilesoul.com",
         },
+        {
+          label: t("web-ssh"),
+          icon: "i-mdi-terminal",
+          target: "_blank",
+          to: "https://sshwifty.compilesoul.com",
+        },
       ],
     },
   ];

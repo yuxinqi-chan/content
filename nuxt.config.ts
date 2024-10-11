@@ -40,6 +40,11 @@ export default defineNuxtConfig({
     global: true,
   },
   content: {
+    experimental: {
+      search: {
+        indexed: true,
+      },
+    },
     highlight: {
       langs: [
         "js",

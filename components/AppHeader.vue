@@ -109,6 +109,7 @@ const icon = useAppConfig().app.logo;
         </UDropdown>
       </template>
       <template v-else>
+        <ContentSearchButton class="max-w-48" :label="t('Search')" />
         <UButton to="/login" color="gray" variant="ghost">
           {{ $t("Login") }}
         </UButton>

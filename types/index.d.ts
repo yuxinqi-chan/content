@@ -44,3 +44,5 @@ export interface BlogPost extends ParsedContent {
     avatar?: Avatar;
   } & Link)[];
 }
+
+export interface ContentSearchLink extends NLink, Omit<Command, "id"> {}

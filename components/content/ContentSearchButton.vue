@@ -3,7 +3,7 @@
     :icon="appConfig.ui.icons.search"
     :label="label"
     truncate
-    v-bind="(!!label ? $ui?.button?.input : $ui?.button?.secondary) as any"
+    v-bind="!!label ? $ui?.button?.input : $ui?.button?.secondary"
     aria-label="Search"
     :class="[!!label && 'flex-1']"
     @click="toggleContentSearch"
@@ -21,7 +21,7 @@
   </UButton>
 </template>
 
-<script setup lang="ts">
+<script setup>
 const appConfig = useAppConfig();
 const { $ui } = useNuxtApp();
 const { toggleContentSearch } = useUIState();

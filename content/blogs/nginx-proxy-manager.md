@@ -30,7 +30,11 @@ Nginx Proxy Manager 是一个基于 Nginx 的反向代理管理工具，它提�
 
 部署 Nginx Proxy Manager 非常简单，只需要几步：
 
-1. **安装 Docker 和 Docker-Compose**：确保你的系统上已经安装了 Docker 和 Docker Compose。
+1. **安装 Docker 和 Docker-Compose**：确保你的系统上已经安装了 Docker 和 Docker Compose。使用以下命令安装 Docker：
+
+```bash
+curl -fsSL https://get.docker.com | bash
+```
 
 2. **创建 Docker Compose 文件**：在你的服务器上创建一个目录，比如 `nginx-proxy-manager`，然后在该目录下创建一个 `docker-compose.yml` 文件，并填入以下内容：
 

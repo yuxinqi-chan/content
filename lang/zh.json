@@ -58,5 +58,6 @@
   "all_rights_reserved": "版权所有",
   "web-ssh": "网页 SSH",
   "Picture": "图片",
-  "copyLink": "复制链接"
+  "copyLink": "复制链接",
+  "copied": "已复制到剪贴板"
 }

@@ -54,6 +54,11 @@ function handleDrop(event: DragEvent) {
   event.preventDefault();
 }
 const { copy } = useClipboard();
+
+function copyLink(link: string) {
+  copy(link);
+  useSuccessToast(t("copied"));
+}
 </script>
 
 <template>
@@ -148,9 +153,9 @@ const { copy } = useClipboard();
           />
           <button
             class="flex items-center rounded-r-md border border-l-0 border-gray-300 p-1 hover:bg-gray-100 dark:hover:bg-gray-800"
-            @click="copy(`${config.app.url}/blobs/${blob.pathname}`)"
+            @click="copyLink(`${config.app.url}/blobs/${blob.pathname}`)"
           >
-            <UIcon name="i-mdi-link" />
+            <UIcon name="i-mdi-link-variant" />
           </button>
         </div>
       </div>

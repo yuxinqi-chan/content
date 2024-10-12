@@ -70,14 +70,13 @@ export default defineNuxtConfig({
     },
   },
   modules: [
+    "@nuxtjs/i18n",
     "nuxt-echarts",
     "@nuxthub/core",
     "nuxt-auth-utils",
     "@nuxt/content",
     "@nuxt/image",
-    ...(process.env.NODE_ENV === "development" ? ["@nuxthq/studio"] : []),
     "@nuxt/ui",
-    "@nuxtjs/i18n",
     "dayjs-nuxt",
     "@pinia/nuxt",
     "pinia-plugin-persistedstate/nuxt",
@@ -135,9 +134,6 @@ export default defineNuxtConfig({
       "MarkLineComponent",
       "MarkPointComponent",
     ],
-  },
-  studio: {
-    enabled: true,
   },
   devtools: {
     enabled: true,

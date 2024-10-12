@@ -44,7 +44,6 @@
     "@iconify-json/mdi": "^1.2.0",
     "@iconify-json/simple-icons": "^1.2.4",
     "@iconify-json/vscode-icons": "^1.2.2",
-    "@nuxthq/studio": "^2.1.1",
     "@types/ua-parser-js": "^0.7.39",
     "@vueuse/core": "^11.1.0",
     "@vueuse/nuxt": "^11.1.0",

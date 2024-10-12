@@ -130,11 +130,15 @@ const { copy } = useClipboard();
         :key="blob.pathname"
         class="flex flex-col items-center gap-2"
       >
-        <img
-          :src="`/blobs/${blob.pathname}`"
-          :alt="blob.pathname"
-          class="h-48 w-48 rounded object-cover"
-        />
+        <div
+          class="flex h-48 w-48 items-center justify-center overflow-hidden rounded transition-all duration-300 hover:scale-105 hover:shadow-lg"
+        >
+          <img
+            :src="`/blobs/${blob.pathname}`"
+            :alt="blob.pathname"
+            class="max-h-full max-w-full object-contain"
+          />
+        </div>
         <div class="flex items-center">
           <input
             type="text"

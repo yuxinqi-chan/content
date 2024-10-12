@@ -22,9 +22,9 @@ const { data: files } = useLazyFetch<ParsedContent[]>("/api/search.json", {
 
 const links = [
   {
-    label: t("Movies"),
-    to: "/movies",
-    icon: "i-mdi-movie",
+    label: t("Blog"),
+    to: "/blog",
+    icon: "i-mdi-book-open-page-variant",
   },
   {
     label: t("Picture"),
@@ -32,9 +32,24 @@ const links = [
     icon: "i-mdi-image",
   },
   {
-    label: t("Tv"),
-    to: "/tv",
-    icon: "i-mdi-television",
+    label: t("Media"),
+    children: [
+      {
+        label: t("Movies"),
+        to: "/movies",
+        icon: "i-mdi-movie",
+      },
+      {
+        label: t("Tv"),
+        to: "/tv",
+        icon: "i-mdi-television",
+      },
+    ],
+  },
+  {
+    label: t("Finance"),
+    to: "/finance",
+    icon: "i-mdi-finance",
   },
   {
     label: t("Tools"),

@@ -150,7 +150,7 @@ const { copy } = useClipboard();
             class="flex items-center rounded-r-md border border-l-0 border-gray-300 p-1 hover:bg-gray-100 dark:hover:bg-gray-800"
             @click="copy(`${config.app.url}/blobs/${blob.pathname}`)"
           >
-            <UIcon name="i-mdi-content-copy" />
+            <UIcon name="i-mdi-link" />
           </button>
         </div>
       </div>

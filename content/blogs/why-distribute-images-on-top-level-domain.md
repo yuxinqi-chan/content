@@ -2,7 +2,7 @@
 title: "为什么要在一级域名上分发图片"
 description: "当浏览器发出静态图像请求并将 Cookie 与请求一起发送时，服务器不会使用这些 Cookie。"
 image:
-  src: /images/e94f63b8654fffb30601f04b422c4d32.jpeg
+  src: https://www.compilesoul.com/blobs/images/e94f63b8654fffb30601f04b422c4d32-c8f608c4.jpeg
 authors:
   - name: yuxinqi
     to: https://github.com/yuxinqi-chan

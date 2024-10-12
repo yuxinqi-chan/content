@@ -2,7 +2,7 @@
 title: python集成mt5，并暴露api给外部服务调用
 description: 当只想用外部信号使mt5下单而不想使用EA时，可以通过python集成mt5，并暴露api给外部服务调用
 image:
-  src: /images/f4aa1264a093830028aa7f1cb20a881b.jpeg
+  src: https://www.compilesoul.com/blobs/images/f4aa1264a093830028aa7f1cb20a881b-04cb7462.jpeg
 authors:
   - name: yuxinqi
     to: https://github.com/yuxinqi-chan

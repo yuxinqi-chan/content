@@ -82,7 +82,7 @@ if (blog.value.image?.src) {
       </div>
     </PageHeader>
     <Page>
-      <PageBody prose>
+      <PageBody prose v-viewer>
         <ContentRenderer v-if="blog && blog.body" :value="blog" />
         <hr v-if="surround?.length" />
         <ContentSurround :surround="surround" />

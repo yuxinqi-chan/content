@@ -2,7 +2,7 @@
 title: python画出BTC当季和次季交割合约价差
 description: BTC当季和次季交割合约存在价差，通过python分析价差的波动情况
 image:
-  src: /images/510a69f7dc98f2cea6feb1b023137bf5.jpeg
+  src: https://www.compilesoul.com/blobs/images/510a69f7dc98f2cea6feb1b023137bf5-9f84038c.jpeg
 authors:
   - name: yuxinqi
     to: https://github.com/yuxinqi-chan
@@ -85,7 +85,8 @@ def unzip_files(root_directory):
 unzip_files('data')
 ```
 
-![v2-16e1ec3252b8cde8096b47c458dc4ed3_720w.png](/images/v2-16e1ec3252b8cde8096b47c458dc4ed3_720w.png)![v2-8cf127e386d26d345f604f8fa7637089_720w.png](/images/v2-8cf127e386d26d345f604f8fa7637089_720w.png)
+![v2-16e1ec3252b8cde8096b47c458dc4ed3_720w.png](https://www.compilesoul.com/blobs/images/v2-16e1ec3252b8cde8096b47c458dc4ed3_720w-1f591108.png)
+![v2-8cf127e386d26d345f604f8fa7637089_720w.png](https://www.compilesoul.com/blobs/images/v2-8cf127e386d26d345f604f8fa7637089_720w-703b1989.png)
 
 ## 画图
 
@@ -134,13 +135,13 @@ concat.plot()
 plt.show()
 ```
 
-![v2-9c3ea8f4f723645f57ada9e7f77d405f_720w.png](/images/v2-9c3ea8f4f723645f57ada9e7f77d405f_720w.png)
+![合约基差](https://www.compilesoul.com/blobs/images/v2-9c3ea8f4f723645f57ada9e7f77d405f_720w-e7f647dd.png)
 
 可以看到在一定范围内波动，但23年btc价格低，24年价格高，所以不能只看价差，还要看比例。
 
 如果真要用来套利也是一边做多一边做空，对冲掉现货的涨跌后，最后盈利也是看比例的变化。
 
-![v2-ed9168bf0bc50e9227791cb566f79d16_720w.png](/images/v2-ed9168bf0bc50e9227791cb566f79d16_720w.png)
+![合约基差百分比](https://www.compilesoul.com/blobs/images/v2-ed9168bf0bc50e9227791cb566f79d16_720w-6ee815ae.png)
 
 换成比例后看出，过去大体上在1%-7%内波动，大涨的时候，预期变好价差扩大。
 

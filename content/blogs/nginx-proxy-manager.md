@@ -2,7 +2,7 @@
 title: Nginx Proxy Manager 介绍与 Docker 部署
 description: Nginx Proxy Manager 是一个具有直观易用的 Web 界面，用于管理 Nginx 反向代理的工具
 image:
-  src: /images/nginx-proxy-manager.png
+  src: https://www.compilesoul.com/blobs/images/nginx-proxy-manager-fa69d271.png
 authors:
   - name: yuxinqi
     to: https://github.com/yuxinqi-chan

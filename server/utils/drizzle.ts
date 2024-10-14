@@ -12,3 +12,7 @@ export function useDrizzle() {
 
 export type User = typeof schema.users.$inferSelect;
 export type UserInsert = typeof schema.users.$inferInsert;
+
+export function selectOne<T>(items: T[]) {
+  return items.length === 1 ? items[0] : undefined;
+}

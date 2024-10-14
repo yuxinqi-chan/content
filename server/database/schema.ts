@@ -57,3 +57,12 @@ export const comments = sqliteTable("comments", {
     .notNull()
     .$defaultFn(() => sql`(current_timestamp)`),
 });
+
+export const shortLinks = sqliteTable("short_links", {
+  slug: text("slug").primaryKey(),
+  url: text("url").notNull(),
+  isProxy: integer("is_proxy", { mode: "boolean" }).notNull().default(false),
+  createdAt: text("created_at")
+    .notNull()
+    .$defaultFn(() => sql`(current_timestamp)`),
+});

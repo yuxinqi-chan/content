@@ -74,6 +74,11 @@ const links = [
         target: "_blank",
         to: "https://sshwifty.compilesoul.com",
       },
+      {
+        label: t("short-link"),
+        icon: "i-mdi-link",
+        to: "/shortLink",
+      },
     ],
   },
 ];

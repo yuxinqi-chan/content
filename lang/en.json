@@ -59,5 +59,14 @@
   "web-ssh": "Web SSH",
   "Picture": "Picture",
   "copyLink": "copy link",
-  "copied": "Copied to clipboard"
+  "copied": "Copied to clipboard",
+  "short-link": "Short Link",
+  "create-short-link": "Create Short Link",
+  "long-url": "Long URL",
+  "custom-slug-optional": "Custom Slug (Optional)",
+  "create": "create",
+  "is-proxy": "is proxy",
+  "create-short-link-success": "Create short link success",
+  "error": "Error",
+  "Invalid URL": "Invalid URL"
 }

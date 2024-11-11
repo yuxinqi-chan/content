@@ -32,36 +32,36 @@ const links = computed<HeaderLink[]>(() => {
       label: t("Finance"),
       to: "/finance",
     },
-    {
-      label: t("Tools"),
-      children: [
-        {
-          label: t("id-photo-generator"),
-          icon: "i-mdi-camera",
-          target: "_blank",
-          to: "https://idphotos.compilesoul.com",
-        },
-        {
-          label: t("pdf-converter"),
-          icon: "i-mdi-file-pdf",
-          target: "_blank",
-          to: locale.value.includes("zh")
-            ? "https://pdf.compilesoul.com/?lang=zh_CN"
-            : "https://pdf.compilesoul.com",
-        },
-        {
-          label: t("web-ssh"),
-          icon: "i-mdi-terminal",
-          target: "_blank",
-          to: "https://sshwifty.compilesoul.com",
-        },
-        {
-          label: t("short-link"),
-          icon: "i-mdi-link",
-          to: "/shortLink",
-        },
-      ],
-    },
+    // {
+    //   label: t("Tools"),
+    //   children: [
+    //     {
+    //       label: t("id-photo-generator"),
+    //       icon: "i-mdi-camera",
+    //       target: "_blank",
+    //       to: "https://idphotos.compilesoul.com",
+    //     },
+    //     {
+    //       label: t("pdf-converter"),
+    //       icon: "i-mdi-file-pdf",
+    //       target: "_blank",
+    //       to: locale.value.includes("zh")
+    //         ? "https://pdf.compilesoul.com/?lang=zh_CN"
+    //         : "https://pdf.compilesoul.com",
+    //     },
+    //     {
+    //       label: t("web-ssh"),
+    //       icon: "i-mdi-terminal",
+    //       target: "_blank",
+    //       to: "https://sshwifty.compilesoul.com",
+    //     },
+    //     {
+    //       label: t("short-link"),
+    //       icon: "i-mdi-link",
+    //       to: "/shortLink",
+    //     },
+    //   ],
+    // },
   ];
 
   return links;

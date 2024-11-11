@@ -121,6 +121,9 @@ export default defineNuxtConfig({
     kv: true,
     cache: true,
   },
+  icon: {
+    serverBundle: "local",
+  },
   echarts: {
     charts: ["LineChart"],
     components: [

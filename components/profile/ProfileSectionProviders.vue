@@ -46,7 +46,7 @@ async function disconnect(providerName: "github" | "twitch") {
           color="gray"
           :to="isGithubConnected ? undefined : '/auth/github'"
           external
-          icon="i-simple-icons-github"
+          icon="i-mdi-github"
           @click="isGithubConnected ? disconnect('github') : undefined"
         >
           {{ user?.githubId ? $t("remove-connection") : $t("connect-github") }}
@@ -55,7 +55,7 @@ async function disconnect(providerName: "github" | "twitch") {
           color="gray"
           :to="isTwitchConnected ? undefined : '/auth/twitch'"
           external
-          icon="i-simple-icons-twitch"
+          icon="i-mdi-twitch"
           @click="isTwitchConnected ? disconnect('twitch') : undefined"
         >
           {{ user?.twitchId ? $t("remove-connection") : $t("connect-twitch") }}

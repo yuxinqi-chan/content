@@ -6,7 +6,7 @@ const config = {
   socials: [
     {
       title: "GitHub",
-      icon: "i-simple-icons-github",
+      icon: "i-mdi-github",
       to: "https://github.com/yuxinqi-chan/content",
       target: "_blank",
     },

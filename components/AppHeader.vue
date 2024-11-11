@@ -72,13 +72,13 @@ const items = [
     {
       label: "Profile",
       to: "/profile",
-      icon: "i-ph-user-duotone",
+      icon: "i-mdi-account-box",
     },
   ],
   [
     {
       label: "Logout",
-      icon: "i-ph-sign-out-duotone",
+      icon: "i-mdi-logout",
       click: async () => {
         await $fetch("/api/_auth/session", {
           method: "DELETE",
